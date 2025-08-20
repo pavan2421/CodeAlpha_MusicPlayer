@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full-Stack Web Music Player</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="light">
+  <header class="app-header">
+    <h1> Music Player</h1>
+    <div class="header-actions">
+      <button id="themeToggle" class="btn secondary" aria-label="Toggle theme" title="Light/Dark">🌗</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <div class="section">
+        <h2>Library</h2>
+        <form id="uploadForm" class="uploader">
+          <label class="btn">
+            <input type="file" id="fileInput" name="files" accept="audio/*" multiple hidden>
+            Upload Files
+          </label>
+          <div class="url-add">
+            <input id="streamUrl" type="url" placeholder="Add stream URL (mp3, etc.)">
+            <button id="addUrlBtn" type="button" class="btn">Add</button>
+          </div>
+        </form>
+
+        <div class="filters">
+          <input id="searchInput" type="search" placeholder="Search by title, artist, album...">
+          <div class="chips">
+            <select id="genreFilter">
+              <option value="">All genres</option>
+            </select>
+            <select id="artistFilter">
+              <option value="">All artists</option>
+            </select>
+          </div>
+        </div>
+
+        <ul id="trackList" class="list"></ul>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <h2>Playlists</h2>
+          <button id="newPlaylistBtn" class="btn small">+ New</button>
+        </div>
+        <ul id="playlistList" class="list"></ul>
+      </div>
+    </aside>
+
+    <section class="content">
+      <div class="now-playing card">
+        <div class="meta">
+          <div class="title" id="npTitle">Nothing playing</div>
+          <div class="subtitle" id="npSubtitle"></div>
+        </div>
+        <div class="time">
+          <span id="currentTime">0:00</span>
+          <input id="seekBar" type="range" min="0" value="0" step="0.01">
+          <span id="duration">0:00</span>
+        </div>
+
+        <div class="controls">
+          <button id="prevBtn" class="icon-btn" title="Previous">⏮</button>
+          <button id="playPauseBtn" class="icon-btn primary" title="Play/Pause">▶️</button>
+          <button id="nextBtn" class="icon-btn" title="Next">⏭</button>
+          <div class="volume">
+            <span>🔊</span>
+            <input id="volumeBar" type="range" min="0" max="1" step="0.01" value="1">
+          </div>
+        </div>
+      </div>
+
+      <div class="queue card">
+        <div class="section-header">
+          <h3>Queue</h3>
+          <button id="clearQueueBtn" class="btn small secondary">Clear</button>
+        </div>
+        <ul id="queueList" class="list"></ul>
+      </div>
+    </section>
+  </main>
+
+  <audio id="audio"></audio>
+
+  <template id="trackItemTemplate">
+    <li class="item track-item">
+      <div class="item-main">
+        <div class="item-title"></div>
+        <div class="item-subtitle"></div>
+      </div>
+      <div class="item-actions">
+        <button data-action="queue" class="btn small">Queue</button>
+        <button data-action="addToPlaylist" class="btn small">Add ➕</button>
+        <button data-action="delete" class="btn small danger">Delete</button>
+      </div>
+    </li>
+  </template>
+
+  <template id="playlistItemTemplate">
+    <li class="item playlist-item">
+      <div class="item-main">
+        <div class="item-title"></div>
+        <div class="item-subtitle"></div>
+      </div>
+      <div class="item-actions">
+        <button data-action="play" class="btn small">Play ▶️</button>
+        <button data-action="rename" class="btn small secondary">Rename</button>
+        <button data-action="delete" class="btn small danger">Delete</button>
+      </div>
+    </li>
+  </template>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
