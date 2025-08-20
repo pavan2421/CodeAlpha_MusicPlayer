@@ -1,4 +1,4 @@
-# Full-Stack Web Music Player
+#  Music Player
 
 A modern, responsive **music player** with **Node.js/Express backend** and **HTML/CSS/JS frontend**.
 
